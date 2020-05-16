@@ -15,7 +15,7 @@ alpha_axis = []
 
 alpha = 100
 while(alpha > 1e-50):
-    mlp = MLPClassifier(hidden_layer_sizes=(20, 6), max_iter=100, alpha=alpha, solver='sgd', tol=1e-4, random_state=1, learning_rate_init=.1)
+    mlp = MLPClassifier(hidden_layer_sizes=(20, 5), max_iter=100, alpha=alpha, solver='sgd', tol=1e-4, random_state=1, learning_rate_init=.1)
     mlp.fit(X_train, y_train)
     alpha_axis.append(alpha)
     score_trainingset.append(mlp.score(X_train, y_train))
