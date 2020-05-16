@@ -13,20 +13,20 @@ score_trainingset = []
 score_testset = []
 alpha_axis = []
 
-alpha = 1e-50
-while(alpha < 100):
+alpha = 100
+while(alpha > 1e-50):
     mlp = MLPClassifier(hidden_layer_sizes=(20, 6), max_iter=100, alpha=alpha, solver='sgd', tol=1e-4, random_state=1, learning_rate_init=.1)
     mlp.fit(X_train, y_train)
     alpha_axis.append(alpha)
     score_trainingset.append(mlp.score(X_train, y_train))
     score_testset.append(mlp.score(X_test, y_test))
-    alpha = alpha * 10
+    alpha = alpha / 10
 
-plt.title('Akkuratheit mit abnehmendem Alpha-Wert')
+plt.title('Akkuratheit mit zunehmendem Alpha-Wert')
 plt.xlabel('Alpha-Wert')
-plt.xscale=('log')
+plt.xscale('log')
 plt.ylabel('Akkuratheit')
 plt.plot(alpha_axis, score_trainingset, label='Trainingsset')
 plt.plot(alpha_axis, score_testset, label='Testset')
 plt.legend()
-plt.savefig('akkuratheit-alpha-3.jpg', dpi = 300)
+plt.savefig('akkuratheit-alpha.jpg', dpi = 300)
