@@ -12,7 +12,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 score_training = []
 score_test = []
 
-for nodes in range(10, 100):
+for nodes in range(1, 100):
     mlp = MLPClassifier(hidden_layer_sizes=(20, nodes), max_iter=100, alpha=1e-4, solver='sgd', tol=1e-4, random_state=1, learning_rate_init=.1)
     mlp.fit(X_train, y_train)
     score_training.insert(nodes, mlp.score(X_train, y_train))
