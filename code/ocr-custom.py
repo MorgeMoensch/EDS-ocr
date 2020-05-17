@@ -14,15 +14,20 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 custom_digits = []
 custom_validation = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+mlp = MLPClassifier(hidden_layer_sizes=(20, 5), max_iter=100, alpha=1e-4, solver='sgd', tol=1e-4, random_state=1, learning_rate_init=.1)
+mlp.fit(X_train, y_train)
+
 for i in range(1, 9):
     img = io.imread('../digits/{}.png'.format(i), as_gray=True)
+    img = resize(img, (8,8))
+    img = np.reshape(img, [-1])
     print(img)
-    custom_digits.append(img[0])
+    print()
+    print("prdicts", mlp.predict([img]))
+    custom_digits.append([img])
     print(custom_digits)
 
 
 
-mlp = MLPClassifier(hidden_layer_sizes=(20, 5), max_iter=100, alpha=1e-4, solver='sgd', tol=1e-4, random_state=1, learning_rate_init=.1)
-mlp.fit(X_train, y_train)
 print(mlp.score(custom_digits, custom_validation))
 
